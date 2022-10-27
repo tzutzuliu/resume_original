@@ -1,0 +1,151 @@
+/* * */
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    list-style-type: none;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+
+/*輪播*/
+.slider_container{
+    height: 60%;
+    width: 100%;
+    /*min-width: 1000px;*/
+    background-image: url('../pic/Voting-system_tzu.png');
+    background-repeat: repeat;
+    position: inherit;
+    top: 3px;
+}
+
+/*增加動畫開始*/
+.slider_container div {
+    -webkit-animation: round 25s linear infinite;
+            animation: round 25s linear infinite;
+}
+
+@-webkit-keyframes round {
+    4% {
+        opacity: 0.5;
+        filter: alpha(opacity=100);
+        /* 0 - 1秒 淡入*/
+    }
+    20% {
+        opacity: 0;
+        filter: alpha(opacity=100);
+        /* 1- 5秒靜止*/
+    }
+    24% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+        /* 5-6秒淡出*/
+    }
+
+}
+
+@keyframes round {
+    4% {
+        opacity: 0.5;
+        filter: alpha(opacity=100);
+        /* 0 - 1秒 淡入*/
+    }
+    20% {
+        opacity: 0;
+        filter: alpha(opacity=50);
+        /* 1- 5秒靜止*/
+    }
+    24% {
+        opacity: 0;
+        filter: alpha(opacity=0);
+        /* 5-6秒淡出*/
+    }
+}
+
+.slider_container div:nth-child(1) {
+    -webkit-animation-delay: 8s;
+            *animation-delay: 5s;
+}
+/*slider動畫結束*/
+
+/*頭的部份*/
+#header{
+    width: 100%;
+    height: 400px;
+
+}
+
+
+#header.slider{
+    height: 100%;
+    display: block;
+}
+
+
+/*header navigation bar*/
+#header nav{
+    width: 100%;
+    min-width: 1000px;
+    margin: 1px auto;
+    background: rgb(200, 84, 123);
+    overflow: auto;
+    font-weight: bolder; /*粗體*/
+}
+
+/* header navigation bar a */
+#header nav a{
+    float: left;
+    display: block;
+    color: black;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/*change color on hover*/
+#header nav a:hover{
+    background-color: rgb(215, 109, 144);
+    color: black;
+}
+/*body*/
+#body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;;
+}
+
+/*整個內容部份*/
+#content{
+    width: 100%; /*給她100%*/
+    margin: 39px auto; /*邊界*/
+}
+
+/*footer頁尾*/
+#footer{
+    width: 100%;
+    min-width: 1000px; /*縮到一定程度就不會再縮了*/
+    background-color: palevioletred;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+}
+
+/*新增投票按鈕*/
+.button-add{
+    background: rgb(238, 219, 11);
+    font-family: inherit;
+    padding: 0.25em 0.75em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    position: relative; /*相對定位*//*不要用fixed+absolute一個固定一個跟基準走,也不要static預設,這樣設top也沒效*/
+    bottom: 148px;
+}
+   
+/*hover*/
+.button-add:hover{
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}

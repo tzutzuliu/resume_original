@@ -1,0 +1,66 @@
+/*整理*/
+*{
+    font-size: 35px;
+}
+
+.body{
+    background-image: url(./May11.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/*中間一整塊*/
+.center{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    margin: 20px;
+    position: absolute;
+}
+
+/*BMI以下的BOX*/
+.box{
+    display: flexbox;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 25px auto;
+    padding: 15px;
+    box-shadow: 5px 5px 5px 5px rgba(66, 26, 4, 0.315);
+}
+
+/*給height一個區塊,並給他一個半徑*/
+.height{
+    background-color: brown;
+    border-radius: 20px 20px 0 0;
+    padding: 25px;
+}
+
+
+/*給weight一個區塊,並給他一個半徑*/
+.weight{
+    background-color: brown;
+    border-radius: 0 0 0 0px;
+    padding: 25px;   
+}
+
+.result{
+    background-color: brown;
+    border-radius: 0 0 20px 20px;
+    padding: 15px;
+   
+}
+
+
+input[type="number"]{
+    border: 0px;
+    margin: 5px;
+    width: 3rem;
+    text-align: center;
+}
+
+input[type="submit"]{
+    border: 0px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
+}
+

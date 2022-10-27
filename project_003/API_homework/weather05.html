@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+</head>
+
+<body>
+    <!-- 1.載入bs -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center">近期各縣市天氣資料</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2.container table table-striped -->
+    <div class="container-fulid">
+        <table class="table table-striped">
+            <tbody>
+                <!-- 總共36小時 =>  12 / 12 /12 -->
+                <!-- 最低溫度minT -->
+                <!-- 最高溫度maxT -->
+                <!-- 總共36小時 =>  time[0] / time[1] /time[2] -->
+                <tr>
+                    <th>ID</th>
+                    <th>縣市</th>
+                    <th>時間一</th>
+                    <th>時間二</th>
+                    <th>時間三</th>
+                </tr>
+                <!-- <tr>
+                    <td>1</td>
+                    <td>嘉義市</td>
+                    <td>
+                        天氣現象
+                        <img src="./img/day/18.svg" alt="">
+                    </td>
+                    <td>最低溫度</td>
+                    <td>降雨機率</td>
+                </tr> -->
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- datatable js cdn.js -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js">
+    </script>
+
+    <script src="./myToken/token.js"></script>
+
+    <!-- .gitignore 這個目錄指定的檔案或資料夾不上傳到github -->
+
+    <script>
+        // 加入判斷
+        // 判斷白天或晚上 day / night
+
+        // 0 night
+        // 6 day
+        // 12 day
+        // 18 night
+
+        const hourArr = [];
+        hourArr[0] = '凌晨';
+        hourArr[6] = '白天';
+        hourArr[12] = '下午';
+        hourArr[18] = '晚上';
+        console.log('hourArr', hourArr);
+
+
+
+        // ajax
+        $.ajax({
+            dataType: 'json',
+            url: dataUrl,
+            // data: 
+            success: function (result) {
+                // console.log('result',result);
+                // console.log(result.records.location);
+
+                let data = result.records.location;
+                console.log('data', data);
+
+                const time0 = new Date(data[0].weatherElement[0].time[0].startTime);
+                const time1 = new Date(data[0].weatherElement[0].time[1].startTime);
+                const time2 = new Date(data[0].weatherElement[0].time[2].startTime);
+
+                console.log('time0', time0);
+                console.log('time1', time1);
+                console.log('time2', time2);
+
+
+                let timeText0 = `
+                    ${time0.getFullYear()} / ${time0.getMonth()+1} / ${time0.getDate()} / ${time0.getHours()}
+                `;
+                let timeText1 = `
+                    ${time1.getFullYear()} / ${time1.getMonth()+1} / ${time1.getDate()} / ${time1.getHours()}
+                `;
+                let timeText2 = `
+                    ${time2.getFullYear()} / ${time2.getMonth()+1} / ${time2.getDate()} / ${time2.getHours()}
+                `;
+                console.log('timeText0',timeText0);
+                console.log('timeText1',timeText1);
+                console.log('timeText2',timeText2);
+
+                $('tr>th').eq(2).text(timeText0);
+                $('tr>th').eq(3).text(timeText1);
+                $('tr>th').eq(4).text(timeText2);
+
+                const iconText0 = (time0.getHours() == 6 || time0.getHours() == 12 ) ? 'day' : 'night';
+                const iconText1 = (time1.getHours() == 6 || time1.getHours() == 12 ) ? 'day' : 'night';
+                const iconText2 = (time2.getHours() == 6 || time2.getHours() == 12 ) ? 'day' : 'night';
+                console.log('iconText0',iconText0); //day
+                console.log('iconText1',iconText1); //night
+                console.log('iconText2',iconText2); //day
+
+
+                // ['weatherElement'][0] //Wx
+                // ['weatherElement'][2] //minT
+                // ['weatherElement'][1] //PoP
+                // Wx 天氣現象
+                // MaxT 最高溫度
+                // MinT 最低溫度
+                // CI 舒適度
+                // PoP 降雨機率
+
+                console.log('data[0]', data[0]['weatherElement']);
+                console.log('data[0]', data[0]['weatherElement'][0].time[0].parameter.parameterName);
+                console.log('data[0]', data[0]['weatherElement'][2].time[0].parameter.parameterName);
+                console.log('data[0]', data[0]['weatherElement'][1].time[0].parameter.parameterName);
+
+                // 2.複雜完整案例說明
+                for (let i = 0; i < data.length; i++) {
+                    $('tbody').append(`
+                        <tr>
+                            <td>${i+1}</td>
+                            <td>${data[i].locationName}</td>
+                                                        
+                            <td>
+                                ${data[i]['weatherElement'][0].time[0].parameter.parameterName}
+                                ${data[i]['weatherElement'][2].time[0].parameter.parameterName} -
+                                ${data[i]['weatherElement'][1].time[0].parameter.parameterName} 
+                                <img src="./img/${iconText0}/${data[i]['weatherElement'][0].time[0].parameter.parameterValue}.svg" alt="">
+                            </td>
+                            <td>
+                                ${data[i]['weatherElement'][0].time[1].parameter.parameterName}
+                                ${data[i]['weatherElement'][2].time[1].parameter.parameterName} -
+                                ${data[i]['weatherElement'][1].time[1].parameter.parameterName} 
+                                <img src="./img/${iconText1}/${data[i]['weatherElement'][0].time[1].parameter.parameterValue}.svg" alt="">
+                            </td>
+                            
+                            <td>
+                                ${data[i]['weatherElement'][0].time[2].parameter.parameterName}
+                                ${data[i]['weatherElement'][2].time[2].parameter.parameterName} -
+                                ${data[i]['weatherElement'][1].time[2].parameter.parameterName} 
+                                <img src="./img/${iconText2}/${data[i]['weatherElement'][0].time[2].parameter.parameterValue}.svg" alt="">
+                            </td>
+                        </tr>
+                    `);
+                }
+
+
+                // 1.簡單說明
+                // tobody 最後一行加入
+                // for (let i = 0; i < data.length; i++) {
+                //     $('tbody').append(`
+                //         <tr>
+                //             <td>${i+1}</td>
+                //             <td>${data[i].locationName}</td>
+                                                        
+                //             <td>
+                //                 ${data[i]['weatherElement'][0].time[0].parameter.parameterName}
+                //                 <img src="./img/day/${data[i]['weatherElement'][0].time[0].parameter.parameterValue}.svg" alt="">
+                //             </td>
+
+                //             <td>${data[i]['weatherElement'][2].time[0].parameter.parameterName}</td>
+
+
+                //             <td>${data[i]['weatherElement'][1].time[0].parameter.parameterName}</td>
+                //         </tr>
+                //     `);
+                // }
+
+
+
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

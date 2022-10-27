@@ -1,0 +1,61 @@
+*{
+    font-size: 18px;
+}
+
+#header.slider{
+    background: plum;
+}
+
+ul{
+    margin: 1rem 0 1rem 5rem;
+}
+
+.list{
+    padding: 0.7rem;
+    margin: 0.5rem;
+    border-bottom: solid purple;
+    border-width: 10px;
+    font-weight: bolder;
+    position: relative;
+    bottom: 180px;
+    right: 100px;
+}
+
+
+.button-edit{
+    display: inline-block;
+    background: rgb(144, 125, 240);
+    font-family: inherit;
+    padding: 0.25em 0.75em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    position: relative; /*相對定位*//*不要用fixed+absolute一個固定一個跟基準走,也不要static預設,這樣設top也沒效*/
+    bottom: 0px;
+}
+   
+.button-edit:hover{
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
+
+.button-delete{
+    display: inline-block;
+    background: rgb(238, 95, 192);
+    font-family: inherit;
+    padding: 0.25em 0.75em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 3px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    position: relative; /*相對定位*//*不要用fixed+absolute一個固定一個跟基準走,也不要static預設,這樣設top也沒效*/
+    bottom: 0px;
+}
+   
+.button-delete:hover{
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+}
